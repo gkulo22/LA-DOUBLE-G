@@ -81,6 +81,7 @@
     </style>
 </head>
 <body>
+{#    <div class="menu-item" id="family" onclick="window.location.href='{% url 'family_bank' %}'">#}
     <div class="menu-item" id="family">
         <i class="bi bi-people-fill"></i>
         <div class="text">
@@ -89,6 +90,7 @@
         </div>
     </div>
 
+{#    <div class="menu-item" id="piggy" onclick="window.location.href='{% url 'piggy_bank' %}'">#}
     <div class="menu-item" id="piggy">
         <i class="bi bi-piggy-bank-fill"></i>
         <div class="text">
@@ -97,7 +99,7 @@
         </div>
     </div>
 
-    <div class="menu-item" id="atm">
+    <div class="menu-item" id="atm" onclick="window.location.href='{% url 'atm_locators' %}'">
         <i class="bi bi-credit-card"></i>
         <div class="text">
             <p>ATM</p>

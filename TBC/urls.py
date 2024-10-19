@@ -15,11 +15,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth import views as auth_views
 from django.urls import path, include
+from ATM.views import atm_locators
 from . import views
+
+def not_logged_in(user):
+    return not user.is_authenticated
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_view, name='home'),
     path('', include('ChemiSivrce.urls')),
+    path('atmLocations', atm_locators, name='atm_locators'),
+    path('register/', views.register, name='register'),
+    path('login/', user_passes_test(not_logged_in, login_url='homew', redirect_field_name=None)(
+        auth_views.LoginView.as_view(template_name='login.html')), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]
