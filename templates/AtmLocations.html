@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TBC ATMs in Tbilisi</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex; /* Use flexbox for centering */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            background-color: #007bff;
+            gap: 20px; /* Space between elements */
+        }
+
+        #map {
+            width: 600px;
+            height: 600px;
+            transition: transform 1.0s; /* Transition for the map */
+            background-color: #007bff;
+            border-radius: 10px;
+        }
+
+        #simulationStuff {
+            width: 600px;
+            height: 600px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 1.0s; /* Transition for the simulation */
+            border: 2px solid black; /* Black border for the simulation */
+            border-radius: 10px;
+        }
+
+        #simulation{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <div id="simulationStuff">
+        <div id="beforeSimulation">
+            <p>Click on the ATM and find out if it is <br>
+            possible to receive your desired amount</p>
+        </div>
+
+        <div id="simulation">
+            <h2>TBC ATMs in Tbilisi</h2>
+            <p>Click on a marker to see more information.</p>
+
+            <input type="number" id="amountInput" placeholder="Enter amount" />
+            <button id="submitAmount">Check Availability</button>
+            <p id="result"></p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map centered in Tbilisi
+        var map = L.map('map').setView([41.7151, 44.8271], 12); // Center of Tbilisi
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // ATM locations with IDs
+        var atmLocations = [
+            {id: 1, lat: 41.6941, lng: 44.8014, name: 'TBC ATM 1'},
+            {id: 2, lat: 41.7053, lng: 44.7901, name: 'TBC ATM 2'},
+            {id: 3, lat: 41.7120, lng: 44.7832, name: 'TBC ATM 3'},
+            {id: 4, lat: 41.7240, lng: 44.7875, name: 'TBC ATM 4'},
+            // Add more ATMs here
+        ];
+
+        let selectedAtmId = null; // Variable to store the selected ATM ID
+
+        // Add markers for each ATM location
+        atmLocations.forEach(function(atm) {
+            var marker = L.marker([atm.lat, atm.lng]).addTo(map)
+                .bindPopup(atm.name)
+                .on('click', function() {
+                    document.getElementById('beforeSimulation').style.display='none';
+                    document.getElementById('simulation').style.display='block';
+                    selectedAtmId = atm.id; // Store the selected ATM ID
+                });
+        });
+
+        map.on('click', function() {
+            document.getElementById('beforeSimulation').style.display='block';
+            document.getElementById('simulation').style.display='none';
+            selectedAtmId = null; // Reset selected ATM ID
+        });
+
+        document.getElementById('submitAmount').addEventListener('click', function() {
+            var amount = document.getElementById('amountInput').value;
+
+            fetch("{% url 'atm_locators' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
+                },
+                body: 'amount=' + amount + '&id=' + selectedAtmId // Send ATM ID along with amount
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = data.message;
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
