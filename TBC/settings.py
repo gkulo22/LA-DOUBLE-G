@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'PiggyBank',
     'FamilyBank',
     'ChemiSivrce',
+    'ATM',
 ]
 
 MIDDLEWARE = [
