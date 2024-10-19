@@ -3,4 +3,4 @@ from django.views.generic import ListView
 from django.views.decorators.cache import cache_control
 
 def home_view(request):
-    pass
+    render(request, 'home.html')

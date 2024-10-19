@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>
+        {% for loan in loans %}
+        <li> <a href = "{% url 'product_view' loan.id %}"> {{  loan.name }} </a> </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
