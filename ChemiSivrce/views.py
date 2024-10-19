@@ -13,8 +13,6 @@ from django.views.generic import (
     DeleteView
 )
 
-def sivrce_view(request):
-    return render(request, 'ChemiSivrce.html')
 
 class WishListView(LoginRequiredMixin, ListView):
     model = Wish
