@@ -19,7 +19,7 @@ def sivrce_view(request):
 class WishListView(LoginRequiredMixin, ListView):
     model = Wish
     template_name = 'WishList.html'
-    context_object_name = 'wish_list'
+    context_object_name = 'wishes'
     ordering = ['-date']
 
     def get_queryset(self):

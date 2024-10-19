@@ -7,7 +7,7 @@
 <body>
     <ul>
         {% for wish in wishes %}
-        <li> <a href = "{% url 'product_view' wish.id %}"> {{  wish.name }} </a> </li>
+        <li>  {{  wish.name }} </li>
         {% endfor %}
     </ul>
 </body>
