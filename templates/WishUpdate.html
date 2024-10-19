@@ -1,11 +1,5 @@
 {% extends "ChemiSivrce.html" %}
 {% block content %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
     <div>
         <form method="POST">
             {% csrf_token %}
@@ -13,6 +7,4 @@
             <button>update</button>
         </form>
     </div>
-</body>
-</html>
 {% endblock content %}

@@ -1,17 +1,8 @@
 {% extends "ChemiSivrce.html" %}
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
     <ul>
         {% for bill in bills %}
-        <li> <a href = "{% url 'product_view' bill.id %}"> {{  bill.name }} </a> </li>
+        <li>  {{  bill.name }} </li>
         {% endfor %}
     </ul>
-</body>
-</html>
 {% endblock content %}

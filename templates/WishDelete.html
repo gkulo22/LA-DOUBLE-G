@@ -1,15 +1,6 @@
 {% extends "ChemiSivrce.html" %}
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
     <h2>დარწმუნებული ხართ რომ გინდათ წაშალოთ განცხადება "{{ object.name }}"</h2>
     <button type="submit">დიახ, წაშალე</button>
     <a href="{% url 'profile_view' %}">გაუქმება</a>
-</body>
-</html>
 {% endblock content %}
