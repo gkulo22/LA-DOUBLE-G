@@ -10,35 +10,100 @@
             margin: 0;
             padding: 0;
             height: 100vh;
-            display: flex; /* Use flexbox for centering */
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background-color: #007bff;
-            gap: 20px; /* Space between elements */
+            gap: 20px;
         }
 
         #map {
             width: 600px;
             height: 600px;
-            transition: transform 1.0s; /* Transition for the map */
+            transition: transform 1.0s;
             background-color: #007bff;
             border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         #simulationStuff {
             width: 600px;
             height: 600px;
+            display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            transition: transform 1.0s; /* Transition for the simulation */
-            border: 2px solid black; /* Black border for the simulation */
+            transition: transform 0.5s ease-in-out;
+            border: 2px solid #000;
             border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
-        #simulation{
+        #simulation {
             display: none;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        #simulation h2 {
+            margin-bottom: 10px;
+            color: #007bff;
+        }
+
+        #simulation p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        #amountInput {
+            width: 80%;
+            padding: 10px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        #submitAmount {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1em;
+        }
+
+        #submitAmount:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .result-success {
+            color: #28a745;
+        }
+
+        .result-failure {
+            color: #dc3545;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
