@@ -44,7 +44,3 @@ class FriendlyLoan(models.Model):
     price = models.FloatField()
     date = models.DateField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-
-
-
-

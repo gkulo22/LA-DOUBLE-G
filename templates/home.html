@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         body {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             margin: 0;
             padding: 0;
             height: 100vh;
@@ -14,66 +15,102 @@
             justify-content: center;
             align-items: center;
             background-color: #007bff;
+            gap: 20px; /* Add space between menu items */
         }
-        .menu {
-            width: 80vw;
-            max-width: 1100px;
-            height: 400px; /* Doubled from 120px to 240px */
-            background-color: #ffffff;
-            border-radius: 120px; /* Adjusted to match new height */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
-        }
+
         .menu-item {
-            width: 250px; /* Increased to fit the larger bar */
-            height: 250px; /* Increased to fit the larger bar */
+            width: 350px;
+            height: 350px;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             cursor: pointer;
             transition: 0.3s;
-            border-radius: 35%;
+            background-color: #007bff;
+            border-radius: 10px;
         }
+
         .menu-item i {
-            font-size: 110px; /* Increased icon size */
-            color: #000000;
+            font-size: 150px;
+            color: white;
             transition: 0.3s;
         }
-        .menu-item.active {
-            background-color: #000000;
+
+        .menu-item .text {
+            opacity: 0;
+            transform: translateY(20px); /* Hidden below initially */
+            transition: opacity 0.3s, transform 0.3s;
+            color: #007bff;
+            font-size: 24px;
+            margin-top: 10px;
+            text-align: center;
         }
-        .menu-item.active i {
-            color: #ffffff;
+
+        .menu-item .description {
+            display: none;
+            color: #007bff;
+            font-size: 18px;
+            margin-top: 10px;
         }
+
+        .menu-item:hover i {
+            font-size: 120px;
+            transform: translateY(-70px); /* Moves the icon upwards */
+        }
+
+        .menu-item:hover .text {
+            font-weight: 600;
+            font-size: 30px;
+            opacity: 1;
+            transform: translateY(-120px); /* Text moves up to become visible */
+        }
+
+        .menu-item:hover .description {
+            display: block;
+        }
+
         .menu-item:hover {
             background-color: #f0f0f0;
+            height: 450px;
         }
-        .menu-item.active:hover {
-            background-color: #333333;
+
+        .menu-item:hover i {
+            color: #007bff;
         }
     </style>
 </head>
 <body>
-    <nav class="menu">
-        <div class="menu-item active" id="family"><i class="bi bi-people-fill"></i></div>
-        <div class="menu-item" id="piggy"><i class="bi bi-piggy-bank-fill"></i></div>
-        <div class="menu-item" id="atm"><i class="bi bi-credit-card"></i></div>
-        <a href="{% url 'wishlist' %}" class="menu-item" id="my-space"><i class="bi bi-person-fill"></i></a>
-    </nav>
+    <div class="menu-item" id="family">
+        <i class="bi bi-people-fill"></i>
+        <div class="text">
+            <p>Family Bank</p>
+            <p class="description">Manage family accounts and set up joint savings.</p>
+        </div>
+    </div>
 
-    <script>
-        const menuItems = document.querySelectorAll('.menu-item');
+    <div class="menu-item" id="piggy">
+        <i class="bi bi-piggy-bank-fill"></i>
+        <div class="text">
+            <p>Piggy Bank</p>
+            <p class="description">Save money with goals and track progress.</p>
+        </div>
+    </div>
 
-        menuItems.forEach(item => {
-            item.addEventListener('click', function() {
-                menuItems.forEach(i => i.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-    </script>
+    <div class="menu-item" id="atm">
+        <i class="bi bi-credit-card"></i>
+        <div class="text">
+            <p>ATM</p>
+            <p class="description">Find nearby ATMs and manage card limits.</p>
+        </div>
+    </div>
+
+    <div class="menu-item" id="my-space" onclick="window.location.href='{% url 'wishlist' %}'">
+        <i class="bi bi-person-fill"></i>
+        <div class="text">
+            <p>My Space</p>
+            <p class="description">Personalize your banking experience and view wishlist.</p>
+        </div>
+    </div>
 </body>
 </html>
