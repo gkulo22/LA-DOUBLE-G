@@ -17,6 +17,7 @@ class Wish(models.Model):
 class Subscription(models.Model):
     service = models.CharField(max_length=100)
     price = models.FloatField(default=timezone.now)
+    date = models.DateField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):

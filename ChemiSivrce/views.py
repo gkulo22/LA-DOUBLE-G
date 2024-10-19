@@ -14,7 +14,7 @@ from django.views.generic import (
 )
 
 def sivrce_view(request):
-    render(request, 'ChemiSivrce.html')
+    return render(request, 'ChemiSivrce.html')
 
 class WishListView(LoginRequiredMixin, ListView):
     model = Wish
@@ -24,7 +24,7 @@ class WishListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         user_id = self.request.user.id
-        return Wish.objects.filter(user_id=user_id).order_by('-date')
+        return Wish.objects.filter(author_id=user_id).order_by('-date')
 
 
 class SubscriptionsListView(LoginRequiredMixin, ListView):
@@ -35,7 +35,7 @@ class SubscriptionsListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         user_id = self.request.user.id
-        return Subscription.objects.filter(user_id=user_id).order_by('-date')
+        return Subscription.objects.filter(author_id=user_id).order_by('-date')
 
 
 class BillsListView(LoginRequiredMixin, ListView):
@@ -46,7 +46,7 @@ class BillsListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         user_id = self.request.user.id
-        return Subscription.objects.filter(user_id=user_id).order_by('-date')
+        return Subscription.objects.filter(author_id=user_id).order_by('-date')
 
 
 class FriendlyLoanListView(LoginRequiredMixin, ListView):
@@ -57,7 +57,7 @@ class FriendlyLoanListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         user_id = self.request.user.id
-        return FriendlyLoan.objects.filter(user_id=user_id).order_by('-date')
+        return FriendlyLoan.objects.filter(author_id=user_id).order_by('-date')
 
 
 class WishCreateView(LoginRequiredMixin, CreateView):
