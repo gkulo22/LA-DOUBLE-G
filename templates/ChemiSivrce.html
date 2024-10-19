@@ -137,21 +137,32 @@
     <header>
         <div class="top-nav">
             <div class="logo">
-                <img src="tbc.svg" alt="Company Logo">
+                <img src="tbc.png" alt="Company Logo"/>
             </div>
             <div class="user-info">
-                <span>გიორგი ყულოშვილი</span>
-                <button class="logout-btn">Logout</button>
+                {% if not user.is_authenticated %}
+                    <a class="logout-btn" href="{% url 'login' %}">Login</a>
+                    <a class="logout-btn" href="{% url 'register' %}">Register</a>
+                {% else %}
+                    <span>{{ user.username }}</span>
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %} 
+                        <button class="logout-btn" type="submit">Logout</button>
+                    </form>
+                {% endif %}
             </div>
         </div>
 
         <!-- Secondary navbar -->
         <nav class="main-nav">
             <ul>
-                <li><a href="#" onclick="loadContent('home')">მთავარი</a></li>
-                <li><a href="#" onclick="loadContent('my-products')">ჯგუფური ბენკინგი</a></li>
-                <li><a href="#" onclick="loadContent('gadarchenebebi')">ლაშას ყულაბა</a></li>
-                <li><a href="#" onclick="loadContent('fins')">ჩემი ფინანსები</a></li>
+{#                <li><a href="{% url 'family_bank' %}" >მთავარი</a></li>#}
+{#                <li><a href="{% url 'piggy_bank' %}" >ჯგუფური ბენკინგი</a></li>#}
+{#                <li><a href="{% url 'atm_locator' %}" >ლაშას ყულაბა</a></li>#}
+                <li><a href="#" >მთავარი</a></li>
+                <li><a href="#" >ჯგუფური ბენკინგი</a></li>
+                <li><a href="#" >ლაშას ყულაბა</a></li>
+                <li><a href="{% url 'wishlist' %}" >ჩემი ფინანსები</a></li>
             </ul>
         </nav>
     </header>
