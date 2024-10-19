@@ -4,20 +4,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Extra Thick Rectangular Navbar</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        
+            /* General Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Arial', sans-serif;
+    }
+
+    body {
+        background-color: #f5f5f5;
+    }
+    
+    a{
+        text-decoration: none;
+        color: inherit;
+    }
+
+    /* Top navbar styles */
+    .top-nav {
+        background-color: #009fdc;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        color: #fff;
+    }
+
+    .top-nav .logo img {
+        height: 40px;
+    }
+
+    .top-nav .user-info {
+        display: flex;
+        align-items: center;
+    }
+
+    .top-nav .user-info span {
+        margin-right: 15px;
+        font-size: 16px;
+    }
+
+    .top-nav .logout-btn {
+        background-color: #f44336;
+        border: none;
+        color: white;
+        padding: 10px 15px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .logout-btn:hover {
+        background-color: #d32f2f;
+    }
+
+    /* Secondary navbar styles */
+    .main-nav {
+        background-color: #333;
+    }
+
+    .main-nav ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 10px 0;
+    }
+
+    .main-nav ul li {
+        margin: 0 15px;
+    }
+
+    .main-nav ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    .main-nav ul li a:hover {
+        color: #009fdc;
+    }
+
+    /* Sidebar styles */
+    .container {
+        display: flex;
+    }
+
+    .sidebar {
+        width: 200px;
+        padding: 20px;
+    }
+
+    .sidebar ul {
+        list-style: none;
+    }
+
+    .sidebar ul li {
+        margin-bottom: 20px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    .sidebar ul li:hover {
+        color: #009fdc;
+    }
+
+    /* Main content styles */
+    .content {
+        flex: 1;
+        padding: 20px;
+        background-color: #fff;
+        margin-top: 10px;
+        margin-left: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .content h2 {
+        color: #333;
+    }
+
     </style>
 </head>
 <body>
-    <a href="{% url 'wishlist' %}">wishlist</a>
-    <a href="{% url 'subscriptions' %}">subscriptions</a>
-    <a href="{% url 'friendly_loans' %}">friendly_loans</a>
-    <a href="{% url 'bills' %}">bills</a>
-    <a href="{% url 'wish_create' %}">wish_create</a>
-{#    <a href="{% url 'wish_update' %}"></a>#}
-{#    <a href="{% url 'wish_delete' %}"></a>#}
-{#    <a href="{% url 'subscription_delete' %}"></a>#}
+    <!-- Top navbar -->
+    <header>
+        <div class="top-nav">
+            <div class="logo">
+                <img src="logo.png" alt="Company Logo">
+            </div>
+            <div class="user-info">
+                <span>გიორგი ყუჟუმშვილი</span>
+                <button class="logout-btn">Logout</button>
+            </div>
+        </div>
+
+        <!-- Secondary navbar -->
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#" onclick="loadContent('home')">მთავარი</a></li>
+                <li><a href="#" onclick="loadContent('my-products')">ჯგუფური ბენკინგი</a></li>
+                <li><a href="#" onclick="loadContent('gadarchenebebi')">ლაშას ყულაბა</a></li>
+                <li><a href="#" onclick="loadContent('fins')">ჩემი ფინსები</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Content wrapper -->
+    <div class="container">
+        <aside class="sidebar">
+            <ul>
+                <li><a href="{% url 'wishlist' %}">სურვილები</a></li>
+                <li><a href="{% url 'subscriptions' %}">გამოწერები</a></li>
+                <li><a href="{% url 'friendly_loans' %}">მეგობრული სესხები</a></li>
+                <li><a href="{% url 'bills' %}">კომუნალური გადასახადები</a></li>
+            </ul>
+        </aside>
+        <main class="content">
+            <div id="content-area">
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </div>
 </body>
 </html>
