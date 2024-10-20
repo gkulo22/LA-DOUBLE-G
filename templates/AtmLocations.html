@@ -11,10 +11,31 @@
             padding: 0;
             height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             background-color: #007bff;
+        }
+
+        #topBar {
+            width: 100%;
+            background-color: #007bff;
+            padding: 10px;
+            margin-left: 20%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #topBar img {
+            height: 50px;
+        }
+
+        #content {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             gap: 20px;
+            flex: 1;
         }
 
         #map {
@@ -77,7 +98,7 @@
             font-size: 1em;
         }
 
-        #beforeSimulation p{
+        #beforeSimulation p {
             color: #007bff;
             font-size: 20px;
         }
@@ -113,21 +134,29 @@
     </style>
 </head>
 <body>
-    <div id="map"></div>
+    <div id="topBar">
+        <a href="{% url 'home' %}">
+            <img src="data:image/png;base64,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" alt="TBC Logo" />
+        </a>
+    </div>
 
-    <div id="simulationStuff">
-        <div id="beforeSimulation">
-            <p>Click on the ATM and find out if it is <br>
-            possible to receive your desired amount</p>
-        </div>
+    <div id="content">
+        <div id="map"></div>
 
-        <div id="simulation">
-            <h2>TBC ATMs in Tbilisi</h2>
-            <p>Click on a marker to see more information.</p>
+        <div id="simulationStuff">
+            <div id="beforeSimulation">
+                <p>Click on the ATM and find out if it is <br>
+                possible to receive your desired amount</p>
+            </div>
 
-            <input type="number" id="amountInput" placeholder="Enter amount" />
-            <button id="submitAmount">Check Availability</button>
-            <p id="result"></p>
+            <div id="simulation">
+                <h2>TBC ATMs in Tbilisi</h2>
+                <p>Click on a marker to see more information.</p>
+
+                <input type="number" id="amountInput" placeholder="Enter amount" />
+                <button id="submitAmount">Check Availability</button>
+                <p id="result"></p>
+            </div>
         </div>
     </div>
 
@@ -148,10 +177,9 @@
             {id: 2, lat: 41.7053, lng: 44.7901, name: 'TBC ATM 2'},
             {id: 3, lat: 41.7120, lng: 44.7832, name: 'TBC ATM 3'},
             {id: 4, lat: 41.7240, lng: 44.7875, name: 'TBC ATM 4'},
-            // Add more ATMs here
         ];
 
-        let selectedAtmId = null; // Variable to store the selected ATM ID
+        let selectedAtmId = null;
 
         // Add markers for each ATM location
         atmLocations.forEach(function(atm) {
@@ -160,14 +188,14 @@
                 .on('click', function() {
                     document.getElementById('beforeSimulation').style.display='none';
                     document.getElementById('simulation').style.display='block';
-                    selectedAtmId = atm.id; // Store the selected ATM ID
+                    selectedAtmId = atm.id;
                 });
         });
 
         map.on('click', function() {
             document.getElementById('beforeSimulation').style.display='block';
             document.getElementById('simulation').style.display='none';
-            selectedAtmId = null; // Reset selected ATM ID
+            selectedAtmId = null;
         });
 
         document.getElementById('submitAmount').addEventListener('click', function() {
@@ -177,13 +205,14 @@
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
-                    'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
+                    'X-CSRFToken': '{{ csrf_token }}',
                 },
-                body: 'amount=' + amount + '&id=' + selectedAtmId // Send ATM ID along with amount
+                body: 'amount=' + amount + '&id=' + selectedAtmId
             })
             .then(response => response.json())
             .then(data => {
                 document.getElementById('result').innerText = data.message;
+                document.getElementById('amountInput').value = '';
             })
             .catch((error) => {
                 console.error('Error:', error);

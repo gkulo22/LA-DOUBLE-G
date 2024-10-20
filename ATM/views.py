@@ -27,7 +27,7 @@ def atm_locators(request):
 
         print(numbers)
 
-        if subset_sum_exists(numbers, int(amount)):
+        if can_find_subset_sum(denominations, int(amount)):
             return JsonResponse({'status': 'success', 'message': 'Amount is available.'})
         else:
             return JsonResponse({'status': 'error', 'message': 'Insufficient funds.'})
@@ -35,14 +35,28 @@ def atm_locators(request):
     return render(request, 'AtmLocations.html')
 
 
-def subset_sum_exists(numbers, target, index=0):
-    if target == 0:
-        return True
+def can_find_subset_sum(m, target):
+    # Get available denominations and their counts
+    coins = list(m.keys())
+    counts = list(m.values())
 
-    if target < 0 or index >= len(numbers) or len(numbers) == 0 or target < numbers[index]:
-        return False
+    # Create a DP array where dp[j] means "is sum j achievable"
+    dp = [False] * (target + 1)
+    dp[0] = True  # Base case: sum of 0 is always achievable with no coins
 
-    include = subset_sum_exists(numbers, target - numbers[index], index + 1)
-    exclude = subset_sum_exists(numbers, target, index + 1)
+    # Iterate over each coin and its count
+    for coin, count in zip(coins, counts):
+        # Create a temporary copy of the dp array to avoid using the same coin multiple times
+        temp_dp = dp[:]
+        for current_sum in range(target + 1):
+            if dp[current_sum]:
+                # Try adding the coin up to 'count' times without exceeding 'target'
+                for k in range(1, count + 1):
+                    new_sum = current_sum + k * coin
+                    if new_sum <= target:
+                        temp_dp[new_sum] = True
+                    else:
+                        break
+        dp = temp_dp
 
-    return include or exclude
+    return dp[target]
