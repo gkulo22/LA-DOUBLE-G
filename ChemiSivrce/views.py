@@ -87,7 +87,7 @@ class WishUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class WishDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Wish
     template_name = 'WishDelete.html'
-    success_url = '/'
+    success_url = '/wishlist'
 
     def test_func(self):
         wish = self.get_object()
@@ -109,9 +109,29 @@ class SubscriptionDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView
 
 
 class BillDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = Subscription
+    model = Bills
     template_name = 'BillDelete.html'
     success_url = '/'
+
+    def test_func(self):
+        wish = self.get_object()
+        if self.request.user == wish.author:
+            return True
+        return False
+
+
+
+def bill_delete_view(request, id):
+    if request.method == 'POST':
+        bill = Bills.objects.get(pk=id)
+
+
+    return None
+
+class LoanDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = FriendlyLoan
+    template_name = 'FriendlyLoanDelete.html'
+    success_url = '/friendly_loans'
 
     def test_func(self):
         wish = self.get_object()
