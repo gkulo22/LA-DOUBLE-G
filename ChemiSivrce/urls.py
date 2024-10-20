@@ -8,6 +8,9 @@ from .views import (
     WishUpdateView,
     WishDeleteView,
     SubscriptionDeleteView,
+    LoanDeleteView,
+    BillDeleteView,
+    bill_delete_view,
 )
 
 urlpatterns = [
@@ -19,4 +22,7 @@ urlpatterns = [
     path('wishlist/<int:pk>/update', WishUpdateView.as_view(), name='wish_update'),
     path('wishlist/<int:pk>/delete', WishDeleteView.as_view(), name='wish_delete'),
     path('subscriptions/<int:pk>/delete', SubscriptionDeleteView.as_view(), name='subscription_delete'),
+    path('bills/<int:pk>/delete', BillDeleteView.as_view(), name='bill_delete'),
+    # path('bills/<int:pk>/delete', bill_delete_view, name='bill_delete'),
+    path('friendlyloans/<int:pk>/delete', LoanDeleteView.as_view(), name='loan_delete'),
 ]

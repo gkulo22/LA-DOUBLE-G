@@ -75,15 +75,14 @@
     </style>
 
     <div class="transaction-list">
-        <h2>დარწმუნებული ხართ რომ გინდათ წაშალოთ "{{ object.name }}"?</h2>
-        <p>თუ წაშლით, ინფორმაცია სამუდამოდ დაიკარგება.</p>
+        <h2>"{{ object.name }}"-ის ვალის გასტუმრება</h2>
 
         <div class="button-container">
             <form method="POST">
                 {% csrf_token %}
-                <button type="submit" class="delete-button">დიახ, წაშალე</button>
+                <button type="submit" class="delete-button">დიახ, გაისტუმრე</button>
             </form>
-            <a href="{% url 'wishlist' %}" class="cancel-button">გაუქმება</a>
+            <a href="{% url 'friendly_loans' %}" class="cancel-button">გაუქმება</a>
         </div>
     </div>
 {% endblock content %}

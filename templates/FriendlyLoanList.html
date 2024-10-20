@@ -14,10 +14,13 @@
             font-size: 1.5rem;
             margin-bottom: 20px;
             color: #444;
+            text-align: center;
         }
 
         .transactions {
             list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
         .transaction-item {
@@ -36,24 +39,6 @@
 
         .transaction-item:hover {
             background-color: #f0f0f0;
-        }
-
-        .transaction-item:hover::after {
-            /* content: "→"; */
-            font-size: 1.2rem;
-            position: absolute;
-            right: 10px;
-            color: #888;
-            opacity: 1;
-            transition: opacity 0.3s ease;
-        }
-
-        .transaction-item::after {
-            content: "";
-            opacity: 0;
-            position: absolute;
-            right: 10px;
-            transition: opacity 0.3s ease;
         }
 
         .date {
@@ -82,6 +67,38 @@
             color: #5cb85c;
         }
 
+        .actions {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+        }
+
+        .edit-button, .delete-button {
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            margin-left: 5px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            color: white;
+        }
+
+        .edit-button {
+            background-color: #5bc0de;
+        }
+
+        .edit-button:hover {
+            background-color: #31b0d5;
+        }
+
+        .delete-button {
+            background-color: #d9534f;
+        }
+
+        .delete-button:hover {
+            background-color: #c9302c;
+        }
+
         @media (max-width: 600px) {
             .transaction-item {
                 flex-direction: column;
@@ -95,8 +112,16 @@
             .amount {
                 align-self: flex-end;
             }
+
+            .actions {
+                flex-direction: row;
+                justify-content: flex-end;
+                width: 100%;
+                margin-top: 10px;
+            }
         }
     </style>
+
     <div class="transaction-list">
         <h2>მეგობრული სესხები</h2>
         <ul class="transactions">
@@ -105,6 +130,12 @@
                     <div class="date">{{ loan.date|date:"F d, Y" }}</div>
                     <div class="description">{{ loan.name }}</div>
                     <div class="amount negative">{{ loan.price }}</div>
+
+                    <!-- Action buttons for Edit and Delete -->
+                    <div class="actions">
+                        <a href="#" class="edit-button">ნაწილობრივ დაფარვა</a>
+                        <a href="{% url 'loan_delete' loan.id %}" class="delete-button">გასტუმრება</a>
+                    </div>
                 </li>
             {% endfor %}
         </ul>
