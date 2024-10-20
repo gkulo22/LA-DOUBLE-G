@@ -28,9 +28,9 @@ def atm_locators(request):
         print(numbers)
 
         if can_find_subset_sum(denominations, int(amount)):
-            return JsonResponse({'status': 'success', 'message': 'Amount is available.'})
+            return JsonResponse({'status': 'success', 'message': 'ტრანზაქცია შესაძლებელია.'})
         else:
-            return JsonResponse({'status': 'error', 'message': 'Insufficient funds.'})
+            return JsonResponse({'status': 'error', 'message': 'არ მოიძებნება შესაბამისი კუპიურები'})
 
     return render(request, 'AtmLocations.html')
 

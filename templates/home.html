@@ -32,6 +32,7 @@
         }
 
         .menu-item i {
+            margin-top: 20px;
             font-size: 150px;
             color: white;
             transition: 0.3s;
@@ -72,7 +73,7 @@
 
         .menu-item:hover {
             background-color: #f0f0f0;
-            height: 500px;
+            height: 540px;
         }
 
         .menu-item:hover i {
@@ -85,32 +86,32 @@
     <div class="menu-item" id="family">
         <i class="bi bi-people-fill"></i>
         <div class="text">
-            <p>Family Bank</p>
-            <p class="description">Manage family accounts and set up joint savings.</p>
+            <p>საოჯახო ბანკი</p>
+            <p class="description">მართეთ საერთო საოჯახო ანგარიში, რომელიც ხელმისაწვდომი იქნება ყველა წევრისთვის</p>
         </div>
     </div>
 
     <div class="menu-item" id="piggy" onclick="window.location.href='{% url 'piggy_bank' %}'">
         <i class="bi bi-piggy-bank-fill"></i>
         <div class="text">
-            <p>Piggy Bank</p>
-            <p class="description">Save money with goals and track progress.</p>
+            <p>მრგვალი ყულაბა</p>
+            <p class="description">დაზოგეთ თანხა მრგვალი ყულაბის მეშვეობით, რომელიც თქვენს მიერ გადახდილ თანხას ამრგვალებს +1 ლარამდე</p>
         </div>
     </div>
 
     <div class="menu-item" id="atm" onclick="window.location.href='{% url 'atm_locators' %}'">
         <i class="bi bi-credit-card"></i>
         <div class="text">
-            <p>ATM</p>
-            <p class="description">Find nearby ATMs and manage card limits.</p>
+            <p>ბანკომატის სიმულატორი</p>
+            <p class="description">გაარკვიეთ რუკიდან სიმულაციის მეშვეობით შესაძლებელია თუ არა თქვენთვის სასურველი თანხის მიღება მითითებულ ბანკომატში</p>
         </div>
     </div>
 
     <div class="menu-item" id="my-space" onclick="window.location.href='{% url 'wishlist' %}'">
         <i class="bi bi-person-fill"></i>
         <div class="text">
-            <p>My Space</p>
-            <p class="description">Personalize your banking experience and view wishlist.</p>
+            <p>ჩემი ფინანსების მენეჯერი</p>
+            <p class="description">გახადე შენი საბანკო გამოცდილება უფრო მეტად მრავალფეროვანი და უშუალო ისეთ ფუნქციონალებთან ერთად როგორებიცაა wishlist, reminder...</p>
         </div>
     </div>
 </body>
