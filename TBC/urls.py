@@ -19,6 +19,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from ATM.views import atm_locators
+from PiggyBank.views import piggybank_view
 from . import views
 
 def not_logged_in(user):
@@ -29,6 +30,7 @@ urlpatterns = [
     path('', views.home_view, name='home'),
     path('', include('ChemiSivrce.urls')),
     path('atmLocations', atm_locators, name='atm_locators'),
+    path('piggyBank', piggybank_view, name='piggy_bank'),
     path('register/', views.register, name='register'),
     path('login/', user_passes_test(not_logged_in, login_url='homew', redirect_field_name=None)(
         auth_views.LoginView.as_view(template_name='login.html')), name='login'),

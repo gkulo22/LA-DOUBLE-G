@@ -44,7 +44,7 @@ class BillsListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         user_id = self.request.user.id
-        return Subscription.objects.filter(author_id=user_id).order_by('-date')
+        return Bills.objects.filter(author_id=user_id).order_by('-date')
 
 
 class FriendlyLoanListView(LoginRequiredMixin, ListView):
@@ -99,6 +99,18 @@ class WishDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class SubscriptionDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Subscription
     template_name = 'SubscriptionDelete.html'
+    success_url = '/'
+
+    def test_func(self):
+        wish = self.get_object()
+        if self.request.user == wish.author:
+            return True
+        return False
+
+
+class BillDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Subscription
+    template_name = 'BillDelete.html'
     success_url = '/'
 
     def test_func(self):

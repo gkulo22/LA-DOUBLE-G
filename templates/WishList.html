@@ -156,9 +156,9 @@
     <div class="transaction-list">
         <h2>სურვილები</h2>
         <!-- Upload button near the title -->
-        <button class="upload-button" title="Upload">
+        <a class="upload-button" title="Upload" href="{% url 'wish_create' %}">
             <i class="bi bi-cloud-upload-fill"></i>დამატება
-        </button>
+        </a>
         <ul class="transactions">
             {% for wish in wishes %}
                 <li class="transaction-item">
@@ -166,12 +166,12 @@
                     <div class="description">{{ wish.name }}</div>
                     <div class="amount positive">{{ wish.price }}</div>
                     <div class="action-buttons">
-                        <button class="btn-update" title="Update">
+                        <a class="btn-update" title="Update" href="{% url 'wish_update' wish.id %}">
                             <i class="bi bi-pencil-fill"></i>
-                        </button>
-                        <button class="btn-delete" title="Delete">
+                        </a>
+                        <a class="btn-delete" title="Delete" href="{% url 'wish_delete' wish.id%}">
                             <i class="bi bi-trash-fill"></i>
-                        </button>
+                        </a>
                     </div>
                 </li>
             {% endfor %}
