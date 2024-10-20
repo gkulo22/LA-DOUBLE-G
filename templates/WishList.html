@@ -155,9 +155,9 @@
 
     <div class="transaction-list">
         <h2>სურვილები</h2>
-        <!-- Upload button near the title -->
-        <a class="upload-button" title="Upload" href="{% url 'wish_create' %}">
-            <i class="bi bi-cloud-upload-fill"></i>დამატება
+        <!-- Upload button near the title with plus icon -->
+        <a class="upload-button" title="Add Wish" href="{% url 'wish_create' %}">
+            <i class="bi bi-plus-lg"></i>დამატება
         </a>
         <ul class="transactions">
             {% for wish in wishes %}

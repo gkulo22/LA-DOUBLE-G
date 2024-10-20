@@ -125,9 +125,10 @@
         color: #333;
     }
     
-    img{
-        width: 20px;
-        height: 10px;
+    .logo img{
+        width: 150px;
+        margin-bottom: 20px;
+        border-radius: 5px;
     }
     </style>
 </head>
@@ -136,7 +137,7 @@
     <header>
         <div class="top-nav">
             <div class="logo">
-                <img src="tbc.png" alt="Company Logo"/>
+                <img src="https://upload.wikimedia.org/wikipedia/ka/archive/a/af/20200328105650%21Tbc-logo-ka_GE.svg" alt="Company Logo"/>
             </div>
             <div class="user-info">
                 {% if not user.is_authenticated %}
